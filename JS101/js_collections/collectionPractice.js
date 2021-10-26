@@ -74,3 +74,31 @@ console.log(palindromeSubstrings("palindrome")); // []
 console.log(palindromeSubstrings(""));           // []
 
 */
+//get the sum of a row of even integers
+//the nth row is given by the argument passed into the function
+
+
+function getSumOfRow(int) {
+  const answerArr = []
+  let length = 1
+  let num = 1;
+
+  for(let i = 0; i < int; i++) {
+    const arr = []
+
+    while(arr.length < length) {
+      if(num % 2 === 0) {
+        arr.unshift(num)
+      }
+      num++
+    }
+
+    answerArr.push(arr)
+    startNum = answerArr.slice().reverse()[0].reverse()[0] + 1
+    length++
+  }
+
+  return answerArr[int - 1].reduce((acc, item) => acc + item, 0);
+}
+
+console.log(getSumOfRow(3))
