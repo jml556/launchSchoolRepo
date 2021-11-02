@@ -1,4 +1,4 @@
-/*
+
 while(true) {
   let num = Math.ceil(Math.random() * 10)
   console.log(num)
@@ -6,7 +6,7 @@ while(true) {
     break;
   }
 }
-*/
+
 
 // PROBLEM:
 
