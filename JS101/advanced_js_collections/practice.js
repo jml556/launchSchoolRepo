@@ -18,10 +18,6 @@ else {
   console.log('Okay, bye now!')
 }
 
-
-
-
-
 while (play) {
   const arr = emptyArr.slice()
   let mark = parseInt(readline.question('Which square would you like? Enter 1 - 9'))
@@ -30,13 +26,6 @@ while (play) {
   markBoard(markMachine(arr), arr, 'machine')
   displayBoard(arr)
 }
-
-
-
-
-
-
-
 
 function markMachine(arr) {
   let randomNum = Math.ceil(Math.random() * 9)
