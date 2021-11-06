@@ -218,29 +218,39 @@ function runningTotal(arr) {
 console.log(runningTotal([14, 11, 7, 15, 20])   )
 */
 
-/*
 
+/*
 const wordSizes = s => {
+  const alphabet = 'abcdefghijklmnopqrstuvwxyz'
+  const alphaArr = alphabet.split('').concat(...alphabet.toUpperCase().split(''))
+
   const obj = {}
   if(!s.length) {
     return obj;
   }
   const arr = s.split(' ')
   for(const word of arr) {
-    if(!obj[word.length]) {
-      obj[word.length] = 1
+    const length = word.split('').filter(item => alphaArr.includes(item)).length
+    if(!obj[length]) {
+      obj[length] = 1
     }
     else {
-      obj[word.length]++
+      obj[length]++
     }
   }
   return obj;
 }
 
+console.log(wordSizes('Hey diddle diddle, the cat and the fiddle!'))
+*/
 
-wordSizes('Four score and seven.');                       // { "3": 1, "4": 1, "5": 1, "6": 1 }
-wordSizes('Hey diddle diddle, the cat and the fiddle!');  // { "3": 5, "6": 1, "7": 2 }
-wordSizes("What's up doc?");                              // { "2": 1, "4": 1, "6": 1 }
-wordSizes('');       
+function swap(string) {
+  const arrOfStrings = string.split(' ')
+  const reverseWordsArr = []
+  for(const word of arrOfStrings) {
+    reverseWordsArr.push(word.split('').reverse().join(''))
+  }
+  return reverseWordsArr.join(' ')
+}
 
-*/// {}
+console.log(swap('Abcde'))
