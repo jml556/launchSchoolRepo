@@ -1,3 +1,4 @@
+const readline = require('readline-sync')
 /*
 function minilang(args) {
 
@@ -132,3 +133,114 @@ console.log(letterPercentages('AbCd +Ef'))
 console.log(letterPercentages('123'))
 // { lowercase: "0.00", uppercase: "0.00", neither: "100.00" }
 */
+
+/*
+A triangle is classified as follows:
+
+Equilateral: All three sides are of equal length.
+Isosceles: Two sides are of equal length, while the third is different.
+Scalene: All three sides are of different lengths.
+To be a valid triangle, the sum of the lengths of the two shortest sides must be greater than the length of the longest side, and every side must have a length greater than 0. If either of these conditions is not satisfied, the triangle is invalid.
+
+Write a function that takes the lengths of the three sides of a triangle as arguments and returns one of the following four strings representing the triangle's classification: 'equilateral', 'isosceles', 'scalene', or 'invalid'.
+
+Examples:
+
+Copy Code
+*/
+/*
+function triangle(num1, num2, num3) {
+  const sidesArr = [num1, num2, num3].sort((a,b) => a - b)
+
+  if(sidesArr[0] + sidesArr[1] < sidesArr[2]) return 'invalid'
+  if(sidesArr.includes(0)) return 'invalid'
+
+  if(sidesArr[1] == sidesArr[0] && sidesArr[2] == sidesArr[1]) return 'equilateral'
+  if(sidesArr[0] == sidesArr[1] || sidesArr[1] == sidesArr[2]) return 'isoceles'
+  else {
+    return 'scalene'
+  }
+}
+
+console.log(triangle(3, 3, 3))  // "equilateral"
+console.log(triangle(3, 3, 1.5));      // "isosceles"
+console.log(triangle(3, 4, 5));        // "scalene"
+console.log(triangle(0, 3, 3));        // "invalid"
+console.log(triangle(3, 1, 1));        // "invalid"
+
+*/
+/*
+const age = Number(readline.question('What is your age'))
+const retireAge = Number(readline.question('What age would you like to reture'))
+
+const date = new Date()
+const year = date.getFullYear()
+
+console.log(`It is ${year} you can retire in ${retireAge - age} in the year ${year + (retireAge - age)}`)
+*/
+
+/*
+const isPalindrome = s => s === s.split('').reverse().join('')
+
+console.log(isPalindrome('madam'))
+*/
+
+/*
+function isRealPalindrome(s) {
+  const alphaNumerArr = 'abcdefghijklmnopqrstuvwxyz1234567890'.split('')
+  const filterArr = s.split('').filter(item => alphaNumerArr.includes(item.toLowerCase())).map(item => item.toLowerCase())
+
+  return filterArr.join('') == filterArr.reverse().join('')
+}
+console.log(isRealPalindrome('123ab321'))
+*/
+
+/*
+function isPalindromicNumber(num) {
+  return num === Number(num.toString().split('').reverse().join(''))
+}
+
+console.log(isPalindromicNumber(34543), isPalindromicNumber(123210),isPalindromicNumber(22) )
+*/
+
+/*
+function runningTotal(arr) {
+  let num = 0;
+  const sumArr = []
+
+  for(let i = 0; i < arr.length; i++) {
+    num += arr[i];
+    sumArr.push(num)
+  }
+  return sumArr
+}
+
+console.log(runningTotal([14, 11, 7, 15, 20])   )
+*/
+
+/*
+
+const wordSizes = s => {
+  const obj = {}
+  if(!s.length) {
+    return obj;
+  }
+  const arr = s.split(' ')
+  for(const word of arr) {
+    if(!obj[word.length]) {
+      obj[word.length] = 1
+    }
+    else {
+      obj[word.length]++
+    }
+  }
+  return obj;
+}
+
+
+wordSizes('Four score and seven.');                       // { "3": 1, "4": 1, "5": 1, "6": 1 }
+wordSizes('Hey diddle diddle, the cat and the fiddle!');  // { "3": 5, "6": 1, "7": 2 }
+wordSizes("What's up doc?");                              // { "2": 1, "4": 1, "6": 1 }
+wordSizes('');       
+
+*/// {}
