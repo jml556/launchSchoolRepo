@@ -243,6 +243,7 @@ const wordSizes = s => {
 
 console.log(wordSizes('Hey diddle diddle, the cat and the fiddle!'))
 */
+/*
 
 function swap(string) {
   const arrOfStrings = string.split(' ')
@@ -254,3 +255,107 @@ function swap(string) {
 }
 
 console.log(swap('Abcde'))
+*/
+
+/*
+const union = (arr1, arr2) => {
+  const newArr = arr1.concat(...arr2)
+  return [...new Set(newArr)]
+}
+
+console.log(union([1, 3, 5], [3, 6, 9]) )
+
+*/
+
+/*
+function halvsies(arr) {
+  if(!arr.length) {
+    return []
+  }
+  if(arr.length % 2 === 0) {
+    const firstHalf = arr.slice(0, arr.length / 2 )
+    const secondHalf = arr.slice(arr.length / 2)
+    return [firstHalf, secondHalf]
+  }
+  const firstHalf = arr.slice(0, arr.length / 2 + 1 )
+  const secondHalf = arr.slice(arr.length / 2 + 1)
+  return [firstHalf, secondHalf]
+}
+
+console.log(halvsies([]))
+*/
+
+/*
+
+function findDup(arr) {
+  return arr.filter((item, idx, arr) => {
+    return !(arr.indexOf(item) == idx)
+  })
+}
+
+console.log(findDup([1,2,3,4,1,2]))
+*/
+
+/*
+function interleave(arr1, arr2) {
+  let position = 1;
+  const combinedArr = arr1
+  for(let i = 0; i < arr2.length; i++) {
+    combinedArr.splice(position, 0, arr2[i])
+    position += 2
+  }
+  console.log(combinedArr)
+}
+
+interleave([1, 2, 3,5,6,7,8], ['a', 'b', 'c', 'd', 'e', 'f'])
+*/
+/*
+
+function multiplicativeAverage(arr) {
+  return (arr.reduce((accum, num) => accum *= num, 1) / arr.length).toFixed(3);
+}
+
+multiplicativeAverage([3, 5]); 
+multiplicativeAverage([2, 5, 7, 11, 13, 17]);
+*/
+
+/*
+function multiplyList(arr1, arr2) {
+  const productArr = []
+  for(let i = 0; i < arr1.length; i++) {
+    productArr.push(arr1[i] * arr2[i])
+  }
+  console.log(productArr)
+}
+
+multiplyList([3, 5, 7], [9, 10, 11]);    // [27, 50, 77]
+*/
+
+/*
+function digitList(num) {
+  return (num.toString().split('').map(item => parseInt(item)))
+}
+
+digitList(12345);       // [1, 2, 3, 4, 5]
+digitList(7);           // [7]
+digitList(375290);      // [3, 7, 5, 2, 9, 0]
+digitList(444);         // [4, 4, 4]
+*/
+
+/*
+
+function triangle(num1, num2, num3) {
+  const ANGLE_ARR = [num1, num2, num3]
+  const ANGLE_SUM = ANGLE_ARR.reduce((acc, item) => acc + item, 0)
+
+  if(ANGLE_ARR.includes(0)) return 'invalid'
+  if(ANGLE_SUM !== 180) return 'invalid'
+  if(ANGLE_ARR.includes(90)) return 'right'
+  if(ANGLE_ARR.filter(item => item > 90).length > 0) return 'obtuse'
+  else {
+    return 'acute'
+  }
+}
+*/
+
+
