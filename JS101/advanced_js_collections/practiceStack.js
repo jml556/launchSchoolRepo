@@ -357,5 +357,152 @@ function triangle(num1, num2, num3) {
   }
 }
 */
+/*
+
+function featured(number) {
+  const MAX_FEATURED = 9876543201;
+  let featuredNum = toOddMultipleOf7(number);
+
+  do {
+    if (allUnique(featuredNum)) {
+      return featuredNum;
+    }
+
+    featuredNum += 14;
+  } while (featuredNum <= MAX_FEATURED);
+
+  return 'There is no possible number that fulfills those requirements.';
+}
+
+function toOddMultipleOf7(number) {
+  do {
+    number += 1;
+  } while (number % 2 === 0 || number % 7 !== 0);
+
+  return number;
+}
+
+function allUnique(number) {
+  let digits = String(number).split('');
+  let seen = {};
+
+  for (let idx = 0; idx < digits.length; idx += 1) {
+    if (seen[digits[idx]]) {
+      return false;
+    }
+
+    seen[digits[idx]] = true;
+  }
+
+  return true;
+}
+
+featured(12);           // 21
+featured(20);           // 21
+featured(21);           // 35
+featured(997);          // 1029
+featured(1029);         // 1043
+featured(999999);       // 1023547
+featured(999999987);    // 1023456987
+featured(9876543186);   // 9876543201
+featured(9876543200);   // 9876543201
+featured(9876543201);   // "There is no possible number that fulfills those requirements."
+*/
+
+/*
+function sumSquareDifference(num) {
+  let sum = 0;
+  let counter = 1;
+
+  while(counter <= num) {
+    sum += counter;
+    counter++
+  }
+
+  let squareSum = 0;
+  let secondCounter = 1;
+
+  while(secondCounter <= num) {
+    squareSum += (secondCounter**2)
+    secondCounter++
+  }
+  
+  console.log(sum**2 - squareSum)
+}
+
+sumSquareDifference(100)
+*/
+
+/* bubble sort solution
+
+function bubbleSort(array) {
+  const arr = array
+  let repeat = true;
+
+  while(repeat) {
+    const copyArr = arr.slice()
+    for(let i = 0; i < arr.length; i++) {
+      if(arr[i] > arr[i + 1]) {
+        [arr[i], arr[i+1]] = [arr[i + 1], arr[i]]
+      }
+    }
+
+    repeat = false;
+    for(let i = 0; i < copyArr.length; i++) {
+      if(copyArr[i] !== arr[i]) {
+        repeat = true;
+        break;
+      }
+    }
+  }
+  return (arr)
+}
+
+bubbleSort(['Sue', 'Pete', 'Alice', 'Tyler', 'Rachel', 'Kim', 'Bonnie'])
+*/
+
+let longText =
+  'Four score and seven years ago our fathers brought forth on this ' +
+  'continent a new nation, conceived in liberty, and dedicated to the ' +
+  'proposition that all men are created equal. Now we are engaged in a ' +
+  'great civil war, testing whether that nation, or any nation so ' +
+  'conceived and so dedicated, can long endure. We are met on a great ' +
+  'battlefield of that war. We have come to dedicate a portion of that ' +
+  'field, as a final resting place for those who here gave their lives ' +
+  'that that nation might live. It is altogether fitting and proper that ' +
+  'we should do this.';
+
+let longerText = longText +
+  'But, in a larger sense, we can not dedicate, we can not consecrate, ' +
+  'we can not hallow this ground. The brave men, living and dead, who ' +
+  'struggled here, have consecrated it, far above our poor power to add ' +
+  'or detract. The world will little note, nor long remember what we say ' +
+  'here but it can never forget what they did here. It is for us the ' +
+  'living, rather, to be dedicated here to the unfinished work which ' +
+  'they who fought here have thus far so nobly advanced. It is rather ' +
+  'for us to be here dedicated to the great task remaining before us -- ' +
+  'that from these honored dead we take increased devotion to that ' +
+  'cause for which they gave the last full measure of devotion -- that ' +
+  'we here highly resolve that these dead shall not have died in vain ' +
+  '-- that this nation, under God, shall have a new birth of freedom -- ' +
+  'and that government of the people, by the people, for the people, ' +
+  'shall not perish from the earth.';
+
+function getLongestSentence(string) {
+  const arr = []
+  const arrOfStrings = string.split('')
+  for(let i = 0; i < string.length; i++) {
+    if(['!', '?', '.'].includes(arrOfStrings[i])) {
+      let mutate = arrOfStrings.splice(0, arrOfStrings.slice(0, i).length)
+      arr.push(mutate)
+
+      console.log(arr, arrOfStrings)
+    }
+  }
+  for(let item of arr) {
+    item.join('')
+  }
+}
 
 
+getLongestSentence('hello, my name is bob. how are you? I\'m doing well')
