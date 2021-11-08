@@ -461,6 +461,7 @@ function bubbleSort(array) {
 bubbleSort(['Sue', 'Pete', 'Alice', 'Tyler', 'Rachel', 'Kim', 'Bonnie'])
 */
 
+/*
 let longText =
   'Four score and seven years ago our fathers brought forth on this ' +
   'continent a new nation, conceived in liberty, and dedicated to the ' +
@@ -506,3 +507,92 @@ function getLongestSentence(string) {
 
 
 getLongestSentence('hello, my name is bob. how are you? I\'m doing well')
+*/
+
+/*
+function wordToDigit(string) {
+  const arrOfNumStrings = {
+    'one': 1,
+    'two': 2,
+    'three': 3, 
+    'four': 4,
+    'five': 5,
+    'six': 6, 
+    'seven': 7, 
+    'eight': 8, 
+    'nine': 9, 
+    'ten': 10
+  }
+
+  const excludeArr = ['?', '.', ',', '!']
+
+  const wordsArr = string.split(' ')
+  const filterPeriodArr = wordsArr.map(item => {
+    if(excludeArr.includes(item[item.length - 1])) {
+      return item.slice(0, item.length - 1)
+    }
+    return item
+  })
+
+  const replacedArr = filterPeriodArr.map(item => {
+    if(Object.keys(arrOfNumStrings).includes(item)) {
+      return arrOfNumStrings[item]
+    }
+    else {
+      return item
+    }
+  })
+  
+  function replaceWord(numArr, originalArr) {
+    const length = numArr.length
+    const replacedArr = []
+
+    for(let i = 0; i < length; i++) {
+      if(numArr[i] !== originalArr[i]) {
+        if(Object.keys(arrOfNumStrings).includes(originalArr[i].slice(0, originalArr[i].length - 1))) {
+          replacedArr.push(numArr[i] + originalArr[i].slice(originalArr[i].length - 1))
+        }
+        else if(typeof numArr[i] == 'string' && typeof originalArr[i] == 'string') {
+          replacedArr.push(originalArr[i])
+        }
+        else {
+          replacedArr.push(numArr[i])
+        }
+      }
+      else {
+        replacedArr.push(numArr[i])
+      }
+    }
+    return replacedArr
+  }
+
+  return (replaceWord(replacedArr, wordsArr).join(' '))
+}
+console.log(wordToDigit('Please call me at! five! five! five one, two? three four. Thanks.'))
+// "Please call me at 5 5 5 1 2 3 4. Thanks."
+*/
+
+/*
+function fib(num) {
+  if(num <= 1) {
+    return 1;
+  }
+  else {
+    return fib(num - 1) + fib(num - 2)
+  }
+}
+
+console.log(fib(3))
+*/
+
+/*
+function fib(num) {
+  const arr = [1, 1]
+  for(let i = 1; i < num - 1; i++) {
+    arr.push(arr[i] + arr[i - 1])
+  }
+  return arr.reverse()[0]
+}
+
+console.log(fib(999))
+*/ 
