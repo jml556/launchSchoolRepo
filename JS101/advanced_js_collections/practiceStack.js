@@ -596,3 +596,10 @@ function fib(num) {
 
 console.log(fib(999))
 */ 
+
+function sum(num) {
+  const total = num.toString().split('').reduce((acc, item) => acc + parseInt(item), 0)
+  console.log(total)
+}
+
+sum(123456787)
