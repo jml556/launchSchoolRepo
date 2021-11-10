@@ -597,9 +597,144 @@ function fib(num) {
 console.log(fib(999))
 */ 
 
+/*
 function sum(num) {
   const total = num.toString().split('').reduce((acc, item) => acc + parseInt(item), 0)
   console.log(total)
 }
 
 sum(123456787)
+*/
+/*
+const isBlockWord = (string) => {
+
+  let answer = true;
+  const arrOfBlocks = {
+    'BO': 1, 
+    'XK': 1, 
+    'DQ': 1, 
+    'CP': 1, 
+    'NA': 1, 
+    'GT': 1, 
+    'RE': 1, 
+    'FS': 1, 
+    'JW': 1, 
+    'HU': 1, 
+    'VI': 1, 
+    'LY': 1, 
+    'ZM': 1
+  }
+
+  const letterArr = string.toUpperCase().split('')
+  const keysArr = Object.keys(arrOfBlocks).flat()
+
+  letterArr.forEach(item => {
+    for(let block of keysArr) {
+      if(block.split('').includes(item)) {
+        if(arrOfBlocks[block] === 0) {
+          answer = false;
+        }
+        else {
+          arrOfBlocks[block]--
+        }
+      }
+    }
+  })
+  return (answer)
+}
+
+/*
+1. initalize an object which contains the two letter blocks as keys and set the value for each block to 1 
+2. initalize a variable which contains the uppercased string argument and is split into an array of letters
+3. initalize a variable with a value of true
+4. initalize a variable which contains an array of keys from the object in step 1 that is only one level deep note: use Object.keys() and .flat() to do this
+5. iterate through the array of letters from step 2 
+  a. For each letter, initalize a loop and loop through each element(block) in the array from step 4
+  b. for each iteration of the loop in step a, split the block/current element into a two letter array and check which block contains the current letter/element in step 5. 
+  c. once we know which block contains our letter in step b. check whether:
+    1.) if that block in our object from step 1 has a value of 0. If so, set the answer to false
+    2.) if not, decrement the value of that block in the object from step 1 to a value of 0
+6. return the variable from step 3
+*/
+
+/*
+function lightsOn(switches) {
+  const switchObj = {};
+  let pass = 2;
+  const arrOfOnSwitches = []
+
+  for(let i = 1; i <= switches; i++) {
+    switchObj[i] = 1
+  }
+
+  for(let i = 0; i < switches; i++) {
+    for(const num in switchObj) {
+      if(parseInt(num) % pass === 0) {
+        if(switchObj[num]) {
+          switchObj[num] = 0
+        }
+        else {
+          switchObj[num] = 1
+        }
+      }
+    }
+    pass++
+  }
+  for (const num in switchObj) {
+    if(switchObj[num] == 1) {
+      arrOfOnSwitches.push(num)
+    }
+  }
+  console.log(arrOfOnSwitches)
+}
+
+lightsOn(100)
+/*
+1. initalize an object
+2. initalize a variable with a value of 2
+3. initalize an empty array;
+4. create a loop with the initalizer set to 1 and the condition set to less than or equal to the value of the switches argument, increment the initalizer by one after each loop
+  a.) in each iteration of the loop, create a new property in the object from step 1. The key should be set to the initalizer and the value should also be set to the initalizer in each iteration from the loop in 4.
+5. create another loop with the initializer set to 0 and the condition to less than the value of the switches argument, increment the initalizer by one after each loop
+  a.) Inside the loop in 5, create a new loop which loops through the object in step 1.
+    1.) Inside this loop from step a, parse each key to a number value and check if:
+      i.) Using the modulus operator, check if the key is evenly divisible by the value of the variable in step 2.
+        1.) if the previous step yields true; set the value of the key to 0 if the current value of the key was 1 and 1 if the current value of the key was 0.
+  b.) increment the variable in step 2 by one
+6. create a loop with loops through the object in step 1
+  a.) check whether a value is set to one for each key. 
+    1.) if so, push the key that is associated with this value to the array in step 3.
+7. return the array from step 3.
+*/
+
+/*
+function merge(arr1, arr2) {
+  const arr = []
+
+  const longerArr = arr1.length >= arr2.length ? arr1.concat() : arr2.concat()
+  const shorterArr = arr1.length >= arr2.length ? arr2.concat() : arr1.concat()
+
+  for(let i = 0; true;) {
+    if(!shorterArr.length) {
+      arr.push(...longerArr)
+      break;
+    }
+    else if(!longerArr.length) {
+      arr.push(...shorterArr)
+      break;
+    }
+    if(shorterArr[i] <= longerArr[i]) {
+      arr.push(shorterArr[i])
+      shorterArr.shift()
+    }
+    else {
+      arr.push(longerArr[i])
+      longerArr.shift()
+    }
+  }
+  console.log(arr)
+}
+
+merge([-3, -2, 1,2,3,5,20,111], [4,5,6,10, 20, 30, 50])
+
+*/
