@@ -738,3 +738,27 @@ function merge(arr1, arr2) {
 merge([-3, -2, 1,2,3,5,20,111], [4,5,6,10, 20, 30, 50])
 
 */
+
+function binarySearch(arr, val) {
+  let condition = true;
+  let found;
+  const copyArr = arr.concat()
+  while(condition) {
+    if(!copyArr.length) break;
+    let middleVal = copyArr[Math.floor(copyArr.length/2)]
+    if(middleVal === val) {
+      found = arr.indexOf(val)
+      break;
+    }
+    else if(middleVal < val) {
+      copyArr.splice(0, copyArr.length % 2 == 0 ? copyArr.length / 2 + 1 : Math.floor(copyArr.length / 2) + 1)
+      console.log(copyArr)
+    }
+    else {
+      copyArr.splice(copyArr.indexOf(middleVal), copyArr.length % 2 == 0 ? copyArr.length / 2 + 1 : Math.floor(copyArr.length / 2) + 1)
+    }
+  }
+  console.log(found, copyArr[found])
+}
+
+binarySearch([1,2,3,4,5,6,7,8,9,10],5)
