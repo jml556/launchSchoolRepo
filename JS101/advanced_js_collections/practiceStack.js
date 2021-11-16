@@ -1,4 +1,4 @@
-const readline = require('readline-sync')
+const readline = require("readline-sync");
 /*
 function minilang(args) {
 
@@ -217,7 +217,6 @@ function runningTotal(arr) {
 
 console.log(runningTotal([14, 11, 7, 15, 20])   )
 */
-
 
 /*
 const wordSizes = s => {
@@ -595,7 +594,7 @@ function fib(num) {
 }
 
 console.log(fib(999))
-*/ 
+*/
 
 /*
 function sum(num) {
@@ -690,20 +689,18 @@ function lightsOn(switches) {
 
 lightsOn(100)
 /*
-1. initalize an object
-2. initalize a variable with a value of 2
-3. initalize an empty array;
-4. create a loop with the initalizer set to 1 and the condition set to less than or equal to the value of the switches argument, increment the initalizer by one after each loop
-  a.) in each iteration of the loop, create a new property in the object from step 1. The key should be set to the initalizer and the value should also be set to the initalizer in each iteration from the loop in 4.
-5. create another loop with the initializer set to 0 and the condition to less than the value of the switches argument, increment the initalizer by one after each loop
-  a.) Inside the loop in 5, create a new loop which loops through the object in step 1.
-    1.) Inside this loop from step a, parse each key to a number value and check if:
-      i.) Using the modulus operator, check if the key is evenly divisible by the value of the variable in step 2.
-        1.) if the previous step yields true; set the value of the key to 0 if the current value of the key was 1 and 1 if the current value of the key was 0.
+1. create an empty object which will be a structure of the switches that are on or off
+2. create a variable with a value of 2, this value will tell us which switches will be selected on each pass
+3. create an empty array which will tell us which switches are on
+4. create a loop which loops from 1 up to and including the value of the argument switches 
+  a.) create a switch inside the empty object from step 1 (the switches will be numbered from 1 to the number of switches) and set each switch to 'on'
+5. create a loop which loops up to the value of the switches argument
+  a.) create a loop which loops through the object in step 1.
+    i.) Check if the current switch is evenly divisible by the value of the variable in step 2.
+      1.) if so, set the value of the current switch to 'off' if it was 'on' and vice versa
   b.) increment the variable in step 2 by one
-6. create a loop with loops through the object in step 1
-  a.) check whether a value is set to one for each key. 
-    1.) if so, push the key that is associated with this value to the array in step 3.
+6. create a loop and iterate through our switches in step 1
+  a.) if the switch is on, add that switch to the array in step 3.
 7. return the array from step 3.
 */
 
@@ -738,7 +735,7 @@ function merge(arr1, arr2) {
 merge([-3, -2, 1,2,3,5,20,111], [4,5,6,10, 20, 30, 50])
 
 */
-
+/*
 function binarySearch(arr, val) {
   let condition = true;
   let found;
@@ -762,3 +759,42 @@ function binarySearch(arr, val) {
 }
 
 binarySearch([1,2,3,4,5,6,7,8,9,10],5)
+*/
+const candide = require('./candide.js')
+
+const excludeChar = ["?", "!", ",", ".", "/", ":", ";", '"'];
+
+const string = candide;
+
+const noLineString = string.replace(/(\r\n|\n|\r)/gm, "")
+
+
+const wordsArr = noLineString.split(" ").map((item) => {
+  let newString;
+
+  if (excludeChar.includes(item[0])) {
+    newString = item.slice(1)
+  }
+  else if (excludeChar.includes(item[item.length - 1])) {
+    newString = item.slice(0, item.length - 1)
+  }
+  return newString ? newString.toLowerCase() : item.toLowerCase()
+})
+
+const countObj = {}
+
+wordsArr.forEach(item => {
+  if(!countObj[item]) {
+    countObj[item] = 1;
+  }
+  else {
+    countObj[item]++
+  }
+})
+
+console.log(Object.entries(countObj).sort((a,b)=> {
+  return b[1] - a[1]
+}))
+
+
+
