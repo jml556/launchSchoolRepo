@@ -1,46 +1,78 @@
-/*
+
 const readline = require('readline-sync')
 let play = false;
 
 const question = readline.question('Would you like to play?').toLowerCase()
-
 question == 'yes' ? play = true : play = false;
-*/
-const readline = require('readline-sync')
+
 rockPaper = {
   rock: 'rock',
   paper : 'paper',
   scissor: 'scissor',
-  userhand: undefined,
-  arrOfHands: ['rock', this.rock],
-
+  userHand: undefined,
+  compHand: undefined,
+  compScore: 0,
+  humanScore: 0,
+  tieScore: 0,
+  roundsPlayed: 0,
   getRandomHand() {
-    console.log(this.arrOfHands)
+    const arrOfHands = [this.rock, this.paper, this.scissor]
     const randomNum = Math.round(Math.random() * 2)
-    return this.arrOfHands[randomNum]
+    this.compHand = arrOfHands[randomNum]
   },
 
-  displayMessage() {
+  startMessage() {
     let question = readline.question('Which hand? \nrock, paper, or scissor?')
-    console.log(this.arrOfHands)
-    while(!this.arrOfHands.includes(question)) {
-      question = 'you need to type a proper hand'
+
+    while(![this.rock, this.paper, this.scissor].includes(question)) {
+      question = readline.question('you need to type a proper hand')
     }
+
+    this.userHand = question
+  },
+
+  compare() {
+    let [player, computer] = [this.userHand, this.compHand]
+    if (player == 'rock') {
+      if(computer == 'paper') this.compScore++
+      if(computer == 'scissor') this.humanScore++
+      if(computer == 'rock') this.tieScore++ 
+    }
+    if (player == 'paper') {
+      if(computer == 'paper') this.tieScore++
+      if(computer == 'scissor') this.compScore++
+      if(computer == 'rock') this.humanScore++ 
+    }
+    if (player == 'scissor') {
+      if(computer == 'paper') this.humanScore++
+      if(computer == 'scissor') this.tieScore++
+      if(computer == 'rock') this.rockScore++ 
+    }
+    this.roundsPlayed++
+  },
+
+  displayScore() {
+    console.log(this.humanScore, this.compScore, this.tieScore, this.roundsPlayed)
   }
 }
 
-//rockPaper.getRandomHand()
-
-
-
-/*
-while(play) {
-  console.log('hi')
-  break
-  //ask player which hand
-  //choose computer hand
-  //play again?
-    //if not set question to false;
+function log() {
+  rockPaper.startMessage()
+  rockPaper.getRandomHand()
+  rockPaper.compare()
+  rockPaper.displayScore()
 }
-*/
+
+while(play) {
+  log()
+  let playAgain = readline.question('Play again? - Yes or No').toLowerCase()
+  if(playAgain == 'no') {
+    console.log('thanks for playing')
+    break;
+    console.log('thanks for playing')
+  }
+}
+
+
+
 
