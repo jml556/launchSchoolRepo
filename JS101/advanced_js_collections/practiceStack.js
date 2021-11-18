@@ -764,37 +764,33 @@ const candide = require('./candide.js')
 
 const excludeChar = ["?", "!", ",", ".", "/", ":", ";", '"'];
 
-const string = candide;
+const noLineString = candide.replace(/(\r\n|\n|\r)/gm, "").match( /[^\.!\?]+[\.!\?]+/g );
 
-const noLineString = string.replace(/(\r\n|\n|\r)/gm, "")
+const sentenceObj = {}
 
-
-const wordsArr = noLineString.split(" ").map((item) => {
-  let newString;
-
-  if (excludeChar.includes(item[0])) {
-    newString = item.slice(1)
-  }
-  else if (excludeChar.includes(item[item.length - 1])) {
-    newString = item.slice(0, item.length - 1)
-  }
-  return newString ? newString.toLowerCase() : item.toLowerCase()
+noLineString.forEach((item, idx) => {
+    sentenceObj[idx] = item
 })
 
-const countObj = {}
+const term = 'Cunegonde'
 
-wordsArr.forEach(item => {
-  if(!countObj[item]) {
-    countObj[item] = 1;
+const arrOfSentences = []
+
+for(const sentence in sentenceObj) {
+  if(sentenceObj[sentence].toLowerCase().includes(term.toLowerCase())) {
+    arrOfSentences.push(sentenceObj[sentence])
   }
-  else {
-    countObj[item]++
-  }
+}
+
+const orderedSentences = {}
+
+arrOfSentences.forEach((item, idx) => {
+  orderedSentences[idx + 1] = item
 })
 
-console.log(Object.entries(countObj).sort((a,b)=> {
-  return b[1] - a[1]
-}))
+console.log(orderedSentences)
+
+
 
 
 
