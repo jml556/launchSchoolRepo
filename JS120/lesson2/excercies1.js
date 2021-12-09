@@ -266,7 +266,7 @@ function createStudent(name, grade) {
  foo.viewNotes();
  */
 
- /*
+/*
 const school = {
   students: [],
   addStudent(name, year) {
@@ -377,3 +377,403 @@ function createStudent(name, year) {
   };
 }
 */
+
+/*
+class Rectangle {
+  constructor(width, length) {
+    this.width = width;
+    this.length = length;
+  }
+
+  getWidth() {
+    return this.width;
+  }
+
+  getLength() {
+    return this.length;
+  }
+
+  getArea() {
+    return this.width * this.length;
+  }
+}
+
+class Square extends Rectangle {
+  constructor(side) {
+    super(side, side)
+  }
+}
+
+let square = new Square(5);
+console.log(`area of square = ${square.getArea()}`); // area of square = 25
+*/
+
+/*
+class Cat {
+  constructor(name) {
+    this.name = name;
+  }
+  speaks() {
+    return `${this.name} says meowwww.`;
+  }
+}
+
+let fakeCat = Object.create(Cat.prototype)
+console.log(fakeCat instanceof Cat); // logs true
+console.log(fakeCat.name);           // logs undefined
+console.log(fakeCat.speaks());       // logs undefined says meowwww.
+*/
+/*
+class Pet {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+class Cat extends Pet {
+  constructor(name, age, color) {
+    super(name, age)
+    this.color = color;
+  }
+  info() {
+    return (this.name + this.age + this.color)
+  }
+}
+
+let pudding = new Cat('Pudding', 7, 'black and white');
+let butterscotch = new Cat('Butterscotch', 10, 'tan and white');
+
+console.log(pudding.info());
+console.log(butterscotch.info());
+/*
+My cat Pudding is 7 years old and has black and white fur.
+My cat Butterscotch is 10 years old and has tan and white fur.
+
+*/
+
+/*
+class Animal {
+  constructor(name, age, legs, species, status) {
+    this.name = name;
+    this.age = age;
+    this.legs = legs;
+    this.species = species;
+    this.status = status;
+  }
+  introduce() {
+    return `Hello, my name is ${this.name} and I am ${this.age} years old and ${this.status}.`;
+  }
+}
+
+class Cat extends Animal {
+  constructor(name, age, status) {
+    super(name, age, 4, 'cat', status)
+  }
+  introduce() {
+    return `${super.introduce()} Meow meow!`;
+  }
+}
+
+class Dog extends Animal {
+  constructor(name, age, status, master) {
+    super(name, age, 4, 'dog', status)
+      this.master = master;
+  }
+  greetMaster() {
+    console.log(`Hello ${this.master}! Woof, woof!`)
+  }
+}
+
+const bob = new Dog('bob', 5, 'hasdappy', 'steve')
+
+bob.greetMaster()
+console.log(bob.introduce())
+*/
+
+/*
+class Car {
+  constructor(make, model, wheel) {
+    this.make = make;
+    this.model = model;
+    this.wheel = wheel
+  }
+
+  getWheels() {
+    return this.wheel;
+  }
+
+  info() {
+    return `${this.make} ${this.model}`
+  }
+}
+
+class Motorcycle extends Car{}
+
+class Truck extends Car {
+  constructor(make, model, payload) {
+    super(make, model, 6)
+    this.payload = payload;
+  }
+}
+
+const moto = new Motorcycle('honda', 'brz', 2)
+*/
+
+/*
+class Person {
+  greeting(text) {
+    console.log(text)
+  }
+}
+
+class Shouter extends Person {
+  greeting(text) {
+    super.greeting(text.toUpperCase())
+  }
+}
+
+let person = new Person();
+let shouter = new Shouter();
+
+person.greeting("Hello. It's very nice to meet you."); // Hello. It's very nice to meet you
+shouter.greeting("Hello my friend."); // HELLO MY FRIEND.
+*/
+/*
+const walkMixin = {
+  walk() {
+    return `${this.name} ${this.gait()} forward`;
+  }
+}
+
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+
+  gait() {
+    return "strolls";
+  }
+}
+
+class Cat {
+  constructor(name) {
+    this.name = name;
+  }
+
+  gait() {
+    return "saunters";
+  }
+}
+
+class Cheetah {
+  constructor(name) {
+    this.name = name;
+  }
+
+  gait() {
+    return "runs";
+  }
+}
+
+Object.assign(Person.prototype, walkMixin)
+Object.assign(Cheetah.prototype, walkMixin)
+Object.assign(Cat.prototype, walkMixin)
+
+console.log(Person.prototype)
+
+
+let mike = new Person("Mike");
+console.log(mike.walk());
+// "Mike strolls forward"
+
+let kitty = new Cat("Kitty");
+console.log(kitty.walk());
+// "Kitty saunters forward"
+
+let flash = new Cheetah("Flash");
+console.log(flash.walk());
+// "Flash runs forward"
+*/
+/*
+class Pet {
+  constructor(type, name) {
+    this.type = type;
+    this.name = name;
+  }
+}
+
+class Owner {
+  constructor(name) {
+    this.name = name;
+    this.num = 0;
+  }
+
+  numberOfPets() {
+    return this.num
+  }
+
+  sayHi() {
+    console.log('hi')
+  }
+}
+
+class Shelter {
+  constructor() {
+    this.adoptions = []
+  }
+  adopt(owner, pet) {
+    owner.num++
+    this.adoptions.push(pet)
+  }
+
+  printAdoptions() {
+    console.log(this.adoptions)
+  }
+}
+
+let butterscotch = new Pet("cat", "Butterscotch");
+let pudding = new Pet("cat", "Pudding");
+let darwin = new Pet("bearded dragon", "Darwin");
+let kennedy = new Pet("dog", "Kennedy");
+let sweetie = new Pet("parakeet", "Sweetie Pie");
+let molly = new Pet("dog", "Molly");
+let chester = new Pet("fish", "Chester");
+
+let phanson = new Owner("P Hanson");
+let bholmes = new Owner("B Holmes");
+
+let shelter = new Shelter();
+shelter.adopt(phanson, butterscotch);
+shelter.adopt(phanson, pudding);
+shelter.adopt(phanson, darwin);
+shelter.adopt(bholmes, kennedy);
+shelter.adopt(bholmes, sweetie);
+shelter.adopt(bholmes, molly);
+shelter.adopt(bholmes, chester);
+shelter.printAdoptions();
+
+
+console.log(`${phanson.name} has ${phanson.numberOfPets()} adopted pets.`);
+console.log(`${bholmes.name} has ${bholmes.numberOfPets()} adopted pets.`);
+
+/*
+P Hanson has adopted the following pets:
+a cat named Butterscotch
+a cat named Pudding
+a bearded dragon named Darwin
+
+B Holmes has adopted the following pets:
+a dog named Molly
+a parakeet named Sweetie Pie
+a dog named Kennedy
+a fish named Chester
+
+P Hanson has 3 adopted pets.
+B Holmes has 4 adopted pets.
+*/
+/*
+class Banner {
+  constructor(message) {
+    this.message = message;
+  }
+
+  displayBanner() {
+    console.log([this.horizontalRule(), this.emptyLine(), this.messageLine(), this.emptyLine(), this.horizontalRule()].join("\n"));
+  }
+
+  horizontalRule() {}
+
+  emptyLine() {}
+
+  messageLine() {
+    return `| ${this.message} |`
+  }
+}
+
+/*
+let banner1 = new Banner('To boldly go where no one has gone before.');
+banner1.displayBanner();
++--------------------------------------------+
+|                                            |
+| To boldly go where no one has gone before. |
+|                                            |
++--------------------------------------------+
+
+let banner2 = new Banner('');
+banner2.displayBanner();
++--+
+|  |
+|  |
+|  |
++--+
+*/
+/*
+let franchise = {
+  name: 'How to Train Your Dragon',
+  allMovies: function() {
+    return [1, 2, 3].map(function(number) {
+      return this.name + ' ' + number;
+    });
+  },
+};
+*/
+/*
+function myFilter(array, func, context) {
+  let result = [];
+
+  array.forEach(function(value) {
+    if (func.call(context, value)) {
+      result.push(value);
+    }
+  });
+
+  return result;
+}
+
+let filter = {
+  allowedValues: [5, 6, 9],
+}
+
+myFilter([2, 1, 3, 4, 5, 6, 9, 12], function(val) {
+  return this.allowedValues.indexOf(val) >= 0;
+}, filter); // returns [5, 6, 9]
+*/
+
+/*
+const towMixin = {
+  tow() {
+    console.log(`I can tow a trailer!`)
+  }
+}
+
+class Truck {}
+
+class Car {}
+Object.assign(Truck.prototype, towMixin)
+
+
+let truck = new Truck();
+truck.tow();
+*/
+
+const towMixin = {
+  tow() {
+    return "I can tow a trailer!";
+  }
+}
+
+class Truck {
+  constructor() {
+    Object.assign(this, towMixin);
+  }
+}
+
+class Car {}
+
+let truck = new Truck(2002);
+console.log(truck.year);
+console.log(truck.tow());
+
+let car = new Car(2015);
+console.log(car.year);
