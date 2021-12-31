@@ -135,10 +135,168 @@ const arr = [1,2]
 
 log(...arr, 3)
 arguments 
-*/
+
 function product(num1, num2, num3) {
   return num1 * num2 * num3;
 }
 
 let array = [2, 3, 5];
 let result = product(...array);
+
+Function.prototype.bind is a method on all function objects that allows us to hard-bind a function to a particular object. The way this works is that you pass a context object to the bind method and it returns a new function that is essentially the same function but hard-bound to the context object supplied.
+
+Create a function myBind, that accepts two arguments: 1) The function to bind, 2) The context object, and returns a new function that's hard-bound to the passed in context object.
+
+
+function myBind(func, context) {
+  return function(...args) {
+    func.call(context, ...args)
+  }
+}
+
+const obj = {
+  words: 'hello'
+}
+
+function hello(str, str2, str3) {
+  console.log(this.words, str, str2, str3)
+}
+
+let boundFunc = myBind(hello, obj)
+
+boundFunc('hi', 'hello', 'dddd') 
+
+function log(...args) {
+  console.log(...args)
+}
+
+log('hhrher', 'efef')
+
+
+function myBind(context) {
+  return function(func) {
+   return function(...args) {
+     func.call(context, ...args)
+   }
+  }
+}
+
+const obj = {
+  words: 'hello'
+}
+
+function hello(str, str2, str3) {
+  console.log(this.words, str, str2, str3)
+}
+
+let boundFunc = myBind(obj)
+let passedFunc = boundFunc(hello)
+passedFunc('hi', 'hello', 'dddd')
+
+Create a function newStack, that, when called, returns a stack object with three methods: push, pop, and printStack. push takes a value and appends it to the stack. pop removes and returns the last element from the stack. printStack logs each remaining element of the stack on its own line, starting with the item that was last recently added to the stack and ending with the most recently added item.
+
+Internally, use an array to implement the stack. Make sure that the array is not accessible from outside the methods.
+
+
+function newStack() {
+  const stack = []
+  return {
+    push(item) {
+      if(stack.length === 5) {
+        stack.shift()
+      }
+      let pushed = stack.push(item)
+      return pushed
+    },
+    pop(item) {
+      let popped = stack.pop(item)
+      return popped
+    },
+    printStack() {
+      console.log(stack.reverse())
+    }
+  }
+}
+
+let stack = newStack()
+stack.push('wewe1')
+stack.push('wewe2')
+stack.push('wewe3')
+stack.push('wewe4')
+stack.push('wewe5')
+stack.push('wewe6')
+stack.printStack()
+
+let foo = {
+  name: 'test',
+  bar: function(greeting) {
+    console.log(greeting + ' ' + this.name);
+  },
+};
+
+let baz = {
+  name: 'yolo',
+  qux: delegate(foo, 'bar', 'hello'),
+};
+
+baz.qux();   // logs 'hello test';
+
+foo.bar = function() { console.log('changed'); };
+
+baz.qux();          // logs 'changed'
+
+function delegate(obj, method, ...args) {
+  return function() {
+    /*
+  function(greeting) {
+      console.log(greeting + ' ' + this.name);
+    }
+    
+    function bob() {
+      console.log(this)
+    }
+    bob()
+    obj[method](...args)
+    console.log(this)
+  }
+}
+*/
+/*
+
+const Account = {
+  init(email, password, firstName, lastName, displayName) {
+    this.email = email;
+    this.password = password;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.displayName = displayName;
+    return this;
+  }
+}
+
+
+function sum(...args) {
+  const values = args;
+
+  return values.reduce(function(a, b) {
+    return a + b;
+  });
+}
+
+console.log(sum(1, 4, 5, 6)); // 16
+
+function formatName(firstName, middleName, lastName) {
+  return `${lastName}, ${firstName} ${middleName[0]}.`;
+}
+
+fullName = ['James', 'Tiberius', 'Kirk'];
+const [james, tiberius, kirk] = fullName
+
+console.log(formatName(james, tiberius, kirk));
+// logs: Kirk, James T.
+*/
+
+
+
+
+
