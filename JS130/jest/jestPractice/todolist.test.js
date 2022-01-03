@@ -29,5 +29,28 @@ describe('TodoList', () => {
   test('check if first todo is returned', () => {
     expect(list.first()).toEqual(todo1)
   })
+
+  test('remove and return first element', () => {
+    const length = list.todos.length;
+    expect(list.shift()).toEqual(todo1)
+    expect(list.todos.length).toEqual(length - 1)
+  })
+
+  test('isDone returns true when all items are done', () => {
+    list.todos.forEach(item => {
+      item.markDone()
+    })
+    expect(list.isDone()).toBe(true)
+  })
+
+  test('check if add method returns a type error', () => {
+    expect(() => list.add('hello world')).toThrow()
+  })
+
+  test('check if todo item has a valid index', () => {
+    expect()
+  })
+
+
   // your tests go here
 });
