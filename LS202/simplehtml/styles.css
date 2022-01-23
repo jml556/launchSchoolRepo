@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+p {
+  font-size: 24px;
+}
+
+.more-text {
+  color: gray;
+}
+
+h1 {
+  color: orange;
+}
+
+strong {
+  color: blue;
+}
+
+em {
+  color: red;
+}
+
+body {
+  background-color: #ffffe0;
+  padding: 75px
+}
