@@ -1,0 +1,26 @@
+{
+  "name": "todos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "todos.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon todo.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.17.2",
+    "express-validator": "^6.14.0",
+    "morgan": "^1.10.0",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
