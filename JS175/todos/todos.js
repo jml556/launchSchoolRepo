@@ -10,6 +10,19 @@ const app = express();
 const host = "localhost";
 const port = 3000;
 
+const compareByTitle = (itemA, itemB) => {
+  let titleA = itemA.title.toLowerCase();
+  let titleB = itemB.title.toLowerCase();
+
+  if (titleA < titleB) {
+    return -1;
+  } else if (titleA > titleB) {
+    return 1;
+  } else {
+    return 0;
+  }
+};
+
 const sortedTodoLists = (lists) => {
   return lists.slice().sort((todoListA, todoListB) => {
     let isDoneA = todoListA.isDone();
@@ -34,6 +47,14 @@ const sortedTodoLists = (lists) => {
   });
 }
 
+const sortTodos = todoList => {
+  let undone = todoList.todos.filter(todo => !todo.isDone());
+  let done   = todoList.todos.filter(todo => todo.isDone());
+  undone.sort(compareByTitle);
+  done.sort(compareByTitle);
+  return [].concat(undone, done);
+};
+
 app.set("views", "./views");
 app.set("view engine", "pug");
 
@@ -53,6 +74,10 @@ app.use((req, res, next) => {
   delete req.session.flash;
   next();
 });
+
+const loadTodoList = todoListId => {
+  return todoLists.find(todoList => todoList.id === todoListId);
+};
 
 app.get("/", (req, res) => {
   res.render("lists", {
@@ -99,7 +124,24 @@ app.post("/lists",
   }
 );
 
-// Listener
+app.get("/lists/:todoListId", (req, res, next) => {
+  let todoListId = req.params.todoListId;
+  let todoList = loadTodoList(+todoListId);
+  if (todoList === undefined) {
+    next(new Error("Not found."));
+  } else {
+    res.render("list", {
+      todoList: todoList,
+      todos: sortTodos(todoList),
+    });
+  }
+});
+
+app.use((err, req, res, _next) => {
+  console.log(err); 
+  res.status(404).send(err.message);
+});
+
 app.listen(port, host, () => {
   console.log(`Todos is listening on port ${port} of ${host}!`);
 });
