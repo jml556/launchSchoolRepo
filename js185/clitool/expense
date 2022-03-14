@@ -2,6 +2,7 @@
 
 const PROCESS = require("process");
 const { Client } = require("pg");
+const readline = require("readline-sync");
 
 function logAndExit(err) {
   console.log(err);
@@ -49,10 +50,57 @@ class ExpenseData {
       .catch((err) => logAndExit(err));
     this.displayExpenses(res.rows);
 
+    this.displayCount(res.rows)
+
     await this.client.end().catch((err) => logAndExit(err));
   }
 
+  async deleteExpense(id) {
+    await this.client.connect().catch((e) => logAndExit(e));
+
+    const queryText = "SELECT * FROM expenses WHERE id = $1";
+    const data = await this.client.query(queryText, [id]);
+    if (data.rows.length === 0) {
+      console.log(`There is no expense with the id ${id}`);
+      await this.client.end();
+    } else {
+      console.log("The following expense has been deleted:");
+      this.displayExpenses(data.rows);
+
+      const deleteQuery = "DELETE FROM expenses WHERE id = $1";
+      await this.client.query(deleteQuery, [id]);
+      await this.client.end();
+    }
+  }
+
+  async clearExpenses() {
+    await this.client.connect().catch((err) => logAndExit(err));
+
+    await this.client.query("DELETE FROM expenses");
+    console.log("All expenses have been deleted");
+
+    await this.client.end().catch((err) => logAndExit(err));
+  }
+
+  displayCount(expenses) {
+    let total = 0;
+    expenses.forEach(item => total++)
+    console.log(`There is ${total} expenses`)
+  }
+  
+  displayTotal(expenses) {
+    let total = 0;
+    expenses.forEach(item => {
+      total += parseFloat(item.amount)
+    })
+    console.log(`Total: ${total}`.padStart(30))
+  }
+
   displayExpenses(expenses) {
+    if(expenses.length === 0) {
+      console.log('there are no expenses')
+      return;
+    }
     expenses.forEach((tuple) => {
       let columns = [
         `${tuple.id}`.padStart(3),
@@ -63,6 +111,8 @@ class ExpenseData {
 
       console.log(columns.join(" | "));
     });
+    this.displayTotal(expenses)
+
   }
 }
 
@@ -102,6 +152,28 @@ search QUERY - list expenses with a matching memo field`;
       }
     } else if (command === "search") {
       this.application.searchExpenses(args[3]);
+    } else if (command === "delete") {
+      if (!args[3]) {
+        console.log("Please enter an id");
+      } else {
+        this.application.deleteExpense(args[3]);
+      }
+    } else if (command === "clear") {
+      const arr = [];
+      while (!arr.includes("y") || !arr.includes("n")) {
+        const answer = readline
+          .question(
+            "This will remove all expenses. Are you sure? (enter y to confirm) # enter y"
+          )
+          .toLowerCase();
+        if (answer === "y" || answer === "n") {
+          arr.push(answer);
+          break;
+        } else {
+          console.log("You must enter a valid input");
+        }
+      }
+      if (arr[0] === "y") this.application.clearExpenses()
     } else {
       this.displayHelp();
     }
