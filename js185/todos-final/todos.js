@@ -5,8 +5,9 @@ const session = require("express-session");
 const { body, validationResult } = require("express-validator");
 const TodoList = require("./lib/todolist");
 const Todo = require("./lib/todo");
-const { sortTodoLists, sortTodos } = require("./lib/sort");
+const { sortTodos } = require("./lib/sort");
 const store = require("connect-loki");
+const SessionPersistence = require("./lib/session-persistence");
 
 const app = express();
 const host = "localhost";
@@ -35,16 +36,8 @@ app.use(session({
 
 app.use(flash());
 
-// Set up persistent session data
 app.use((req, res, next) => {
-  let todoLists = [];
-  if ("todoLists" in req.session) {
-    req.session.todoLists.forEach(todoList => {
-      todoLists.push(TodoList.makeTodoList(todoList));
-    });
-  }
-
-  req.session.todoLists = todoLists;
+  res.locals.store = new SessionPersistence(req.session);
   next();
 });
 
@@ -79,7 +72,7 @@ app.get("/", (req, res) => {
 // Render the list of todo lists
 app.get("/lists", (req, res) => {
   res.render("lists", {
-    todoLists: sortTodoLists(req.session.todoLists),
+    todoLists: res.locals.store.sortedTodoLists(),
   });
 });
 
