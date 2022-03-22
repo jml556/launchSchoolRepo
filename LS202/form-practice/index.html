@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body, fieldset {
+        padding: 10px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <form action="#" method="GET">
+      <fieldset>
+        <dl>
+          <dt><label for="first-name">First Name</label></dt>
+          <dd><input type="text" id="first-name" /></dd>
+        </dl>
+        <dl>
+          <dt><label for="last-name">Last Name</label></dt>
+          <dd><input type="text" id="last-name" /></dd>
+        </dl>
+        <dl>
+          <dt><label for="email-address">Email Address</label></dt>
+          <dd><input type="email" id="email-address" placeholder="eg. 123@gmail.com"/></dd>
+        </dl>
+        <dl>
+          <dt><label for="city">City </label></dt>
+          <dd><input type="text" id="city" /></dd>
+        </dl>
+        <dl>
+          <dt><label for="state">State</label></dt>
+          <dd>
+            <select name="state">
+              <option value="MD">MD</option>
+              <option value="VA">VA</option>
+              <option value="NY">NY</option>
+              <option value="NJ">NJ</option>
+            </select>
+          </dd>
+        </dl>
+        <dl>
+          <dt><label for="zip-code">Zip Code</label></dt>
+          <dd><input type="number" id="zip-code" placeholder="*****" max="5"/></dd>
+        </dl>
+        <p>Which of these colors do you like best?</p>
+        <textarea rows="6" cols="80"></textarea>
+        <input type="hidden" value="2018-02-17"/>
+        <button type="submit">Send</button>
+        <input type="reset"/>
+      </fieldset>
+    </form>
+  </body>
+</html>

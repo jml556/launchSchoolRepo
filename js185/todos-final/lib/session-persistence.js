@@ -8,7 +8,14 @@ module.exports = class SessionPersistence {
     session.todoLists = this._todoLists;
   }
 
+  isDoneTodoList(todoList) {
+    return todoList.todos.length > 0 && todoList.todos.every(todo => todo.done);
+  }
+
   sortedTodoLists() {
-    return sortTodoLists(this._todoLists)
+    let todoLists = deepCopy(this._todoLists);
+    let undone = todoLists.filter(todoList => !this.isDoneTodoList(todoList));
+    let done = todoLists.filter(todoList => this.isDoneTodoList(todoList));
+    return sortTodoLists(undone, done);
   }
 };
