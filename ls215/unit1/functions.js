@@ -92,39 +92,73 @@ function octalToDecimal(string) {
 
 octalToDecimal('2047')
 
-*/
+
 
 function anagram(word, list) {
-  //iterate through the list of words and create an obj that contains the letter count in the array
-  //iterate through the list from one and check if the letter counts are equal
-
-  const wordCounts = list.slice().map(word => {
-    const obj = {}
-    obj[word] = {}
-    word.split('').forEach(letter => {
-      if(!obj[word][letter]) obj[word][letter] = 1;
-      else {
-        obj[word][letter]++
-      }
-    })
-    return obj
-  })
   const wordObj = {}
-
   word.split('').forEach(letter => {
-    if(!wordObj[letter]) wordObj[letter] = 1;
-    else {
-      wordObj[letter]++
-    }
+    wordObj[letter] ? wordObj[letter]++ : wordObj[letter] = 1;
   })
-  console.log(wordCounts)
-  return Object.entries(wordCounts.filter(obj => {
+  return list.filter(word => {
+    const letterObj = {}
+    word.split('').forEach(letter => {
+      letterObj[letter] ? letterObj[letter]++ : letterObj[letter] = 1
+    })
     for(const key in wordObj) {
-      const newObj = Object.entries(obj)[0][1]
-      if(wordObj[key] != newObj[key]) return false
+      if(wordObj[key] != letterObj[key]) {
+        return false;
+      }
     }
-    return true
-  }))
+    return true;
+  })
+
 }
 
-console.log(anagram('listen', ['enlist', 'google', 'inlets', 'banana']));   // [ "enlist", "inlets" ]
+console.log(anagram('listen', ['enlists', 'google', 'inlets', 'banana']));   // [ "enlist", "inlets" ]
+
+let bands = [
+  { name: 'sunset rubdown', country: 'UK', active: false },
+  { name: 'women', country: 'Germany', active: false },
+  { name: 'a silver mt. zion', country: 'Spain', active: true },
+];
+
+function processBands(data) {
+  const copyData = data.slice()
+
+  function capitalize(word) {
+    const wordArr = word.split(' ')
+    const capitalizedArr = wordArr.map(word => {
+      const letters = word.split('')
+      letters[0] = letters[0].toUpperCase()
+      return letters.join('')
+    })
+    return capitalizedArr.join(' ')
+  }
+
+  function canadianize() {
+    return 'Canada'
+  }
+
+  function removeDots(name) {
+    if(name.split('').includes('.')) {
+      const letterArr = name.split('')
+      const idx = letterArr.indexOf('.')
+      letterArr.splice(idx, 1)
+      return letterArr.join('')
+    }
+    else {
+      return name;
+    }
+  }
+
+  copyData.forEach(obj => {
+    obj.name = capitalize(obj.name)
+    obj.country = canadianize()
+    obj.name = removeDots(obj.name)
+  })
+
+  return copyData
+}
+
+console.log(processBands(bands))
+*/
